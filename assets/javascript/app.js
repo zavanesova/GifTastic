@@ -1,11 +1,12 @@
 var animals = ["dog", "cat", "squirrel", "owl"];
 
 function displayGifs() {
-var animal = $(this).attr("data-name");
-var apikey = "8CjKzV1t7oi9qZjn7v0CLewpqhX7Rnfb";
-var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=" + apikey + "&limit=10";
 
+    
 $("button").on("click", function(){
+    var apikey = "8CjKzV1t7oi9qZjn7v0CLewpqhX7Rnfb";
+    var animal = $(this).attr("data-name");
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=" + apikey + "&limit=10";
     $.ajax({
         url: queryURL,
         method: "GET"
