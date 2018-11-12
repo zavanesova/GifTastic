@@ -4,7 +4,7 @@ function displayGifs() {
 $("button").on("click", function(){
     var apikey = "8CjKzV1t7oi9qZjn7v0CLewpqhX7Rnfb";
     var animal = $(this).attr("data-name");
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=" + apikey + "&limit=10";
+    var queryURL = "//api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=" + apikey + "&limit=10";
     $.ajax({
         url: queryURL,
         method: "GET"
