@@ -10,43 +10,50 @@ $("button").on("click", function(){
         method: "GET"
     }).then(function(response) {
         var results = response.data;
-
+        console.log(results.rating);
+        //adding gifDiv and rating text for all results
         for (var i = 0; i < results.length; i++) {  
-            var gifDiv = $('<div class="gifs-here">');
-            var rating = results[i].rating;
-            var p = $('<p>').text(rating);
-            var image = $('<img class ="animal-gif">');
-            image.attr("src", results[i].images.fixed_height_still.url);
-            gifDiv.prepend(p);
-            gifDiv.prepend(image);
+            //filtering results to only show certain ratings
+            if(results[i].rating === "g" || results[i].rating === "pg") {
+                var gifDiv = $('<div class="gifs-here">');
+                var rating = results[i].rating;
+                var p = $('<p> class="rating">').text(rating);
+                var image = $('<img class ="animal-gif">');
+                image.attr("src", results[i].images.fixed_height_still.url);
+                gifDiv.prepend(p);
+                gifDiv.prepend(image);
 
-            $("#gifs-appear").prepend(gifDiv);
-            
-            function animateGif() {
-                var still = results[i].images.fixed_height_still.url;
-                var animate = results[i].images.fixed_height.url;
-            
-            
-                $('.animal-gif').on("click", function() {
-                    var clicked = $(this).attr("data");
+                $("#gifs-appear").prepend(gifDiv);
 
-                    if (image.attr("src", still)) {
-                        image.attr("src", animate);
-                    } else{
-                        image.attr("src", still);
-                    }
-                })
+                //adding attributes for animated/still gif
+                image.attr("data-still", results[i].images.fixed_height_still.url);
+                image.attr("data-animate", results[i].images.fixed_height.url);
+                image.attr("data-state", results[i].images.fixed_height_still.url);
+               
+        }}
+        
+        //changing state from still to animated on click
+        $(".animal-gif").on("click", function(){
+            var state = $(this).attr("data-state");
+            var still = $(this).attr("data-still");
+            var animate = $(this).attr("data-animate");
+            
+            $(this).attr(state); 
+
+            if(state = state) {
+                $(this).attr("src", animate);
+                state = animate;
+            //else is being ignored for some reason, gif restarts on click but doesn't stop completely
+            } else {
+                $(this).attr("src", still);
             }
-
-            animateGif();   
-        }
-    
+        })  
+        
     })
-
 })
 
 }
-
+//rendering buttons for items in animals array
 function renderButtons() {    
     $('#animal-buttons').empty();
     for (var i=0; i < animals.length; i++) {
@@ -62,16 +69,21 @@ function renderButtons() {
 
 $(document).ready(function() {
 
+//displays new animal buttons added by user when submit button is clicked
+//gifs appear when new button is clicked
+$(".new-animal").on("click", displayGifs());
+
 $('#add-animal').on("click", function(event) {
     event.preventDefault();
     var newAnimal = $('#animal-input').val().trim();
     animals.push(newAnimal);
+    console.log(animals);
     renderButtons();
+    displayGifs();
 });
-
-$(document).on("click", ".new-animal", displayGifs);
 
 renderButtons();
 
 displayGifs();
+
 })
