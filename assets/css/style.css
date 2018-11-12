@@ -1,8 +1,14 @@
 body{
     background-image: url("../images/pink_rice.png");
 }
+h1{
+    margin-top: 25px;
+    font-family: 'Cuprum', sans-serif;
+    font-size: 70px;
+    color: #477acc;
+}
 #animal-buttons{
-    margin-top: 30px;
+    margin-top: 20px;
 }
 #animal-form{
     margin-top: 30px;
@@ -10,8 +16,23 @@ body{
 button{
     margin: 10px;
     padding: 4px 15px 4px 15px;
-    background-color: #a5b6d1;
+    background-color: #c3d0e5;
     border: 3px solid #bec4ce;
-    border-radius: 2px
+    border-radius: 2px;
+    font-family: 'Cuprum', sans-serif;
+    font-size: 20px;
     
+}
+#form{
+    font-family: 'Cuprum', sans-serif;
+    font-size: 20px;
+}
+#add-animal{
+    font-family: 'Cuprum', sans-serif;
+    font-size: 20px;
+    background-color: #ced5e0;
+}
+.rating{
+    font-family: 'Cuprum', sans-serif;
+    font-size: 20px;
 }
